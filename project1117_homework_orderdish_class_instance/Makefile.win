@@ -1,0 +1,69 @@
+# Project: orderdish_class
+# Makefile created by Dev-C++ 5.11
+
+CPP      = g++.exe -D__DEBUG__
+CC       = gcc.exe -D__DEBUG__
+WINDRES  = windres.exe
+OBJ      = main.o CButton.o CEdit.o CLabel.o CTool.o CControl.o CWindow.o CLoginWin.o CInitWin.o CRegisterWin.o CAdminWin.o CManagerWin.o CWaiterWin.o CUserManager.o
+LINKOBJ  = main.o CButton.o CEdit.o CLabel.o CTool.o CControl.o CWindow.o CLoginWin.o CInitWin.o CRegisterWin.o CAdminWin.o CManagerWin.o CWaiterWin.o CUserManager.o
+LIBS     = -L"D:/devc++/Dev-Cpp/MinGW64/lib" -L"D:/devc++/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc -g3
+INCS     = -I"D:/devc++/Dev-Cpp/MinGW64/include" -I"D:/devc++/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"D:/devc++/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
+CXXINCS  = -I"D:/devc++/Dev-Cpp/MinGW64/include" -I"D:/devc++/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"D:/devc++/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"D:/devc++/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++"
+BIN      = orderdish_class.exe
+CXXFLAGS = $(CXXINCS) -ansi -std=gnu++11 -g3 -std=c11 
+-fexec-charset=gbk
+CFLAGS   = $(INCS) -ansi -std=gnu++11 -g3 -std=c11 
+-fexec-charset=gbk
+RM       = rm.exe -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+main.o: main.cpp
+	$(CPP) -c main.cpp -o main.o $(CXXFLAGS)
+
+CButton.o: CButton.cpp
+	$(CPP) -c CButton.cpp -o CButton.o $(CXXFLAGS)
+
+CEdit.o: CEdit.cpp
+	$(CPP) -c CEdit.cpp -o CEdit.o $(CXXFLAGS)
+
+CLabel.o: CLabel.cpp
+	$(CPP) -c CLabel.cpp -o CLabel.o $(CXXFLAGS)
+
+CTool.o: CTool.cpp
+	$(CPP) -c CTool.cpp -o CTool.o $(CXXFLAGS)
+
+CControl.o: CControl.cpp
+	$(CPP) -c CControl.cpp -o CControl.o $(CXXFLAGS)
+
+CWindow.o: CWindow.cpp
+	$(CPP) -c CWindow.cpp -o CWindow.o $(CXXFLAGS)
+
+CLoginWin.o: CLoginWin.cpp
+	$(CPP) -c CLoginWin.cpp -o CLoginWin.o $(CXXFLAGS)
+
+CInitWin.o: CInitWin.cpp
+	$(CPP) -c CInitWin.cpp -o CInitWin.o $(CXXFLAGS)
+
+CRegisterWin.o: CRegisterWin.cpp
+	$(CPP) -c CRegisterWin.cpp -o CRegisterWin.o $(CXXFLAGS)
+
+CAdminWin.o: CAdminWin.cpp
+	$(CPP) -c CAdminWin.cpp -o CAdminWin.o $(CXXFLAGS)
+
+CManagerWin.o: CManagerWin.cpp
+	$(CPP) -c CManagerWin.cpp -o CManagerWin.o $(CXXFLAGS)
+
+CWaiterWin.o: CWaiterWin.cpp
+	$(CPP) -c CWaiterWin.cpp -o CWaiterWin.o $(CXXFLAGS)
+
+CUserManager.o: CUserManager.cpp
+	$(CPP) -c CUserManager.cpp -o CUserManager.o $(CXXFLAGS)
