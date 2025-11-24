@@ -161,6 +161,63 @@ public:
 };
 ```
 
+#### 三要素协同工作流程
+
+**第一次调用 `getInstance()`：**
+
+```cpp
+CUserManager* mgr1 = CUserManager::getInstance();
+// 执行流程：
+// 1. 检查 instance == NULL？ → 是（还没创建）
+// 2. 执行 instance = new CUserManager() → 调用私有构造函数
+// 3. 返回 instance 的地址 → mgr1 得到这个地址
+```
+
+**第二次调用 `getInstance()`：**
+
+```cpp
+CUserManager* mgr2 = CUserManager::getInstance();
+// 执行流程：
+// 1. 检查 instance == NULL？ → 否（已经有对象了）
+// 2. 跳过创建步骤
+// 3. 直接返回 instance → mgr2 得到相同的地址
+// 结果：mgr1 == mgr2 （指向同一个对象！）
+```
+
+**关键问题解答：**
+
+**Q: 为什么 `instance` 必须是 `static`？**
+
+因为`static`成员属于**类本身**，不属于某个对象，全局只有一份。
+
+```cpp
+// 如果不是static
+class Test {
+    Test* instance;  // 每个对象有自己的instance
+};
+Test* t1 = new Test();  // t1.instance
+Test* t2 = new Test();  // t2.instance（不同的！）
+
+// 如果是static
+class Test {
+    static Test* instance;  // 全局只有一个instance
+};
+// 所有地方访问的都是同一个instance
+```
+
+**Q: 为什么 `getInstance()` 必须是 `static`？**
+
+因为要在**没有对象**的情况下调用。
+
+```cpp
+// 如果不是static，就会陷入死循环：
+CUserManager* temp = ???;        // 怎么创建？构造函数是私有的！
+temp->getInstance();              // 需要对象才能调用
+
+// 是static，可以直接通过类名调用：
+CUserManager::getInstance();     // ✅ 不需要对象
+```
+
 ### 2.3 拷贝构造函数禁用
 
 **问题：** 即使构造函数是私有的，编译器仍会生成默认的拷贝构造函数，可能导致单例被复制。
